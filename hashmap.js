@@ -195,17 +195,57 @@ export default class HashMap {
     }
 }
 
-const hashmap = new HashMap();
+const test = new HashMap();
+test.set('apple', 'red');
+test.set('banana', 'yellow');
+test.set('carrot', 'orange');
+test.set('dog', 'brown');
+test.set('elephant', 'gray');
+test.set('frog', 'green');
+test.set('grape', 'purple');
+test.set('hat', 'black');
+test.set('ice cream', 'white'); 
+test.set('jacket', 'blue');
+test.set('kite', 'pink'); 
+test.set('lion', 'golden');
+console.log(`Current Length: ${test.length()}`);
+console.log(`Current Bucket Size: ${test.buckets.length}`);
+test.set('donkey', 'shrek');
+test.set('moon', 'silver')
 
-console.log(hashmap.hash('Sara'));
-console.log(hashmap.hash('raSa'));;
-hashmap.set('Sara', 'Geronimo');
-hashmap.set('Sara', 'Lagero');
-hashmap.set('Anotherone', 'Secondone');
-hashmap.get('Sara');
-console.log(hashmap.has('Sara'));
-console.log(hashmap.has('Nosara'));
-console.log(hashmap.length());
-console.log(hashmap.keys());
-console.log(hashmap.values());
-console.log(hashmap.entries());
+test.set('donkey', 'puss');
+console.log(`New Length: ${test.length()}`);
+console.log(`New Bucket Size: ${test.buckets.length}`);
+
+console.log(`Testing get(key)`);
+console.log(test.get('donkey'))
+
+console.log(`Testing has(key)`);
+console.log(test.has('donkey'));
+
+console.log(`Testing length()`);
+console.log(test.length());
+
+console.log(`Testing keys()`);
+console.log(test.keys())
+
+console.log(`Testing values()`);
+console.log(test.values())
+
+console.log(`Testing entries()`);
+console.log(test.entries())
+
+console.log(`Testing clear()`);
+console.log(test.clear())
+
+console.log(`Testing length()`);
+console.log(test.length());
+
+console.log(`Testing keys()`);
+console.log(test.keys())
+
+console.log(`Testing values()`);
+console.log(test.values())
+
+console.log(`Testing entries()`);
+console.log(test.entries())
