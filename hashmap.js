@@ -28,22 +28,8 @@ export default class HashMap {
         const index = this.hash(key);
         if (index < 0 || index >= this.buckets.length) throw new Error("Trying to access index out of bounds");
 
-        const bucket = this.buckets[index];
-        if (bucket instanceof LinkedList) {
-            // Check if node with the key already exist
-            let node = bucket.findNodeByKey(key);
-            if (node) {
-            // update the node value
-            node.value = value;
-                return true;
-            };
-
-            bucket.append(key, value);
-            return true;
-        }
-
         // If adding a new node exceeds the capacity
-        const timeToGrow = this.length() >= Math.floor(this.buckets.length * this.loadFactor)
+        const timeToGrow = this.length() > Math.floor(this.buckets.length * this.loadFactor)
         if (timeToGrow) {
             // Grab all entries and push a new node
             // For each entry, set it
@@ -59,6 +45,21 @@ export default class HashMap {
             })
             return true;
         }
+
+        const bucket = this.buckets[index];
+        if (bucket instanceof LinkedList) {
+            // Check if node with the key already exist
+            let node = bucket.findNodeByKey(key);
+            if (node) {
+                // update the node value
+                node.value = value;
+                return true;
+            };
+
+            bucket.append(key, value);
+            return true;
+        }
+
 
         // if its empty generate a linked list
         const bucketLinkedList = new LinkedList();
