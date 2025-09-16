@@ -29,14 +29,18 @@ export default class HashMap {
         if (index < 0 || index >= this.buckets.length) throw new Error("Trying to access index out of bounds");
 
         const bucket = this.buckets[index];
-        if (bucket != undefined) {
-            // Check if one of the key exist in the nodes
+        if (bucket instanceof LinkedList) {
+            // Check if node with the key already exist
             let node = bucket.findNodeByKey(key);
-            if (node == undefined) return false;
-
+            if (node) {
             // update the node value
             node.value = value;
+                return true;
+            };
+
+            bucket.append(key, value);
             return true;
+        }
 
         }
 
