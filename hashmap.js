@@ -1,7 +1,7 @@
 import LinkedList from "./linkedlist.js";
 
 export default class HashMap {
-    loadFactor = 0.8;
+    loadFactor = 0.75;
     buckets = new Array(16);
 
     hash = (key) => {
@@ -42,6 +42,22 @@ export default class HashMap {
             return true;
         }
 
+        // If adding a new node exceeds the capacity
+        const timeToGrow = this.length() >= Math.floor(this.buckets.length * this.loadFactor)
+        if (timeToGrow) {
+            // Grab all entries and push a new node
+            // For each entry, set it
+            const entries = this.entries();
+            entries.push([key, value]);
+
+            // Create a new bucket double the size
+            const newBuckets = new Array(this.buckets.length * 2);
+            this.buckets = newBuckets;
+
+            entries.forEach(entry => {
+                this.set(entry[0], entry[1]);
+            })
+            return true;
         }
 
         // if its empty generate a linked list
